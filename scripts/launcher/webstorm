@@ -1,0 +1,2 @@
+~/Applications/webstorm/webstorm/bin/webstorm.sh &>/dev/null &
+disown

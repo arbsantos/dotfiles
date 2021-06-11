@@ -1,0 +1,76 @@
+#!/bin/bash
+##############################################
+# Made by Gustavo Correia and Pedro Caldeira #
+##############################################
+
+function getRemainingTime(){
+
+	pNow0=$(cat /sys/class/power_supply/BAT0/power_now)
+	pNow1=$(cat /sys/class/power_supply/BAT1/power_now)
+
+	totalpNow=`echo "$pNow0 + $pNow1 + 1" | bc -l`
+
+	bat0=$(cat /sys/class/power_supply/BAT0/energy_now)
+	bat1=$(cat /sys/class/power_supply/BAT1/energy_now)
+
+	totalBat=`echo "$bat0 + $bat1" | bc -l`
+
+	remTime=`echo "scale=4; $totalBat / $totalpNow" | bc -l`
+
+	decimal=$(echo $remTime | sed 's/.*\.//g')
+	decimal=$(echo $decimal | awk '{ print "0." $1 ; }')
+
+	mins=`echo " $decimal * 60" | bc -l`
+	mins=$(echo $mins | sed 's/\..*//g')
+
+	hours=$(echo $remTime | sed 's/\..*//g')
+
+	finalTime=$(echo "${hours}:${mins}")
+
+	finalTime=$(date -d "$finalTime" +%H:%M)
+
+
+}
+
+function getRemainingCapacity(){
+
+	bat0=$(cat /sys/class/power_supply/BAT0/capacity)
+	bat1=$(cat /sys/class/power_supply/BAT1/capacity)
+
+	avgBat=$(echo "scale=0; ($bat0 + $bat1) / 2.0" | bc -l)
+}
+
+function main(){
+
+	stateBat0=$(cat /sys/class/power_supply/BAT0/status)
+	stateBat1=$(cat /sys/class/power_supply/BAT1/status)
+
+	
+	if [ "$stateBat0" == "Discharging" ] || [ "$stateBat1" == "Discharging" ]; then
+		getRemainingTime
+		getRemainingCapacity
+		totalpNow=$(echo $totalpNow | awk '{print ($1*10^-6) }' | sed 's/\..*//g')
+
+		if [ "$avgBat" -le 25 ]; then
+			echo "<span font_desc='FontAwesome'>&#xf243;</span> $avgBat% $finalTime ${totalpNow}W"
+		elif [ "$avgBat" -gt 25 ] && [ "$avgBat" -lt 50 ]; then 
+			echo "<span font_desc='FontAwesome'>&#xf242;</span> $avgBat% $finalTime ${totalpNow}W"
+		elif [ "$avgBat" -ge 50 ] && [ "$avgBat" -lt 75 ]; then
+			echo "<span font_desc='FontAwesome'>&#xf241;</span> $avgBat% $finalTime ${totalpNow}W"
+		else
+			echo "<span font_desc='FontAwesome'>&#xf240;</span> $avgBat% $finalTime ${totalpNow}W"
+		fi
+	elif [ "$stateBat0" == "Charging" ] || [ "$stateBat1" == "Charging" ]; then
+		getRemainingCapacity
+		echo "<span font_desc='FontAwesome'>&#xf0e7;</span> $avgBat%"
+	elif [ "$stateBat0" == "Full" ] || [ "$stateBat1" == "Full" ]; then 
+		echo "<span font_desc='FontAwesome'>&#xf1e6;</span>" 
+	else
+		getRemainingCapacity
+		echo "<span font_desc='FontAwesome'>&#xf362;</span> $avgBat%" 
+	fi
+	
+}
+
+main
+

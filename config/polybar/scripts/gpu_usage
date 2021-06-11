@@ -1,0 +1,2 @@
+#!/bin/bash
+nvidia-smi -q -d utilization | grep "Gpu" | awk '{print $3}'

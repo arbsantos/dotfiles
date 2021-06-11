@@ -1,0 +1,3 @@
+#!/bin/bash
+~/Applications/station.AppImage &>/dev/null
+disown

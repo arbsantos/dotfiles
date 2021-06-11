@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#echo ""
+echo -e "<span color='green'><span font='FontAwesome 16'>\uf1bc</span></span>"
+
+case "$BLOCK_BUTTON" in 
+1|2|3)
+
+    v=`ps cax | grep -w spotify`
+    if [[ $v ]]; then
+	#  echo "Process is running."   
+	i3-msg "[class="Spotify"] scratchpad show"
+    else
+	i3-msg "exec spotify" 
+    fi	
+
+esac
+#echo "t1"
+
+ 

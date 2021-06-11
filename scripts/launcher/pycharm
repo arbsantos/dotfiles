@@ -1,0 +1,2 @@
+~/Applications/pycharm/bin/pycharm.sh &>/dev/null &
+disown

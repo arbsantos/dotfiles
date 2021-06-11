@@ -1,0 +1,20 @@
+#!/bin/bash
+cpu=$(sensors | awk '/^Package id 0/{print $4}')
+#proc=$(ps axch -o cmd:15,%cpu --sort=-%mem | head)
+echo "$cpu"
+#count=0
+#result="CPU: "
+#while IFS=' ' read -ra ADDR; do
+#	for i in "${ADDR[@]}"; do
+#		rem=$(($count % 2))
+#		if [ "$rem" -ne "0" ]; then
+#			result="$result $save $i"
+#		fi  
+#		save=$i
+#		((count++))
+#	done
+#done <<< "$proc"
+#echo "<tool>"$result"</tool>"
+
+
+

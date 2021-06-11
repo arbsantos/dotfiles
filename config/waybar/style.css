@@ -1,0 +1,112 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: 'Cascadia Code','Font Awesome 5 Free Solid', 'Font Awesome 5 Free Regular',  'Font Awesome 5 Brands Regular';
+    font-size: 12px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: #292929;
+    color: #ffffff;
+}
+
+window#waybar.hidden {
+    opacity: 0.0;
+}
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button {
+    padding: 0px;
+    background: transparent;
+    color: #ffffff;
+}
+
+#workspaces button.focused {
+    background: #292929;
+    color: #ff5757;
+}
+
+#workspaces button.urgent {
+    background-color: #ff5757;
+}
+
+#mode {
+    background: #292929;
+}
+
+#clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #custom-media, #tray, #mode, #idle_inhibitor {
+    padding: 0 10px;
+    margin: 0 5px;
+}
+
+#clock {
+    background-color: #292929;
+}
+
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+#cpu {
+    background: #292929;
+}
+
+#memory {
+    background: #292929;
+}
+
+#network {
+    background: #292929;
+}
+
+#network.disconnected {
+    background: #292929;
+}
+
+#pulseaudio {
+    background: #292929;
+}
+
+#pulseaudio.muted {
+    background: #292929;
+}
+
+#custom-media {
+    background: #292929;
+}
+
+#custom-playerctl{
+    padding-left: 10px;
+}
+
+.custom-spotify {
+    background: #292929;
+}
+
+.custom-vlc {
+    background: #292929;
+}
+
+#temperature {
+    background: #292929;
+}
+
+#temperature.critical {
+    background: #ff5757;
+}
+
+#tray {
+    background-color: #292929;
+}
+
+#idle_inhibitor {
+    background-color: #2d3436;
+}
+
+#idle_inhibitor.activated {
+    background-color: #2d3436;
+}

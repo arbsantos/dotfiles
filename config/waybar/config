@@ -1,0 +1,100 @@
+{
+    "layer": "top", // Waybar at top layer
+    "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 32, // Waybar height
+    // "width": 120, // Waybar width
+    // Choose the order of the modules
+    "modules-left": ["sway/workspaces", "sway/mode", "custom/playerctl"],
+    //"modules-center": ["custom/media", "custom/playerctl"],
+    "modules-right": ["cpu", "temperature", "memory", "network", "pulseaudio", "clock", "tray"],
+    // Modules configuration
+     "sway/workspaces": {
+         "disable-scroll": false,
+         "disable-markup" : false,
+         "all-outputs": false,
+         "format": "<span font='12'> {icon} </span>",
+         "format-icons": {
+             "1": "",
+             "2": "",
+             "3": "",
+             "4": "",
+             "5": "",
+             "6": "龜",
+             "7": "",
+             "8": "",
+             "9": "",
+             "10": ""
+             //"focused": "",
+             //"default": ""
+         }
+     },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10
+    },
+    "clock": {
+        "tooltip-format": "{:%Y-%m-%d | %H:%M}",
+        "interval": 60,
+        "format": "<span font='10' rise='-1000'></span> {:%A, %d of %B at %H:%M}"
+    },
+    "cpu": {
+        "format": "<span font='10' rise='-500'></span> {usage:2}%",
+        "interval": 1
+    },
+    "memory": {
+        "format": "<span font='10' rise='-1000'></span> {used:.3}/{total:.3} {percentage}%"
+    },
+    "temperature": {
+        "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        "format-critical": "<span font='10' rise='-500'></span> {temperatureC}°C",
+        "format": "<span font='10' rise='-500'></span> {temperatureC}°C"
+    },
+    "network": {
+        // "interface": "wlp2s0", // (Optional) To force the use of this interface
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "<span font='10' rise='-1000'></span> {ipaddr}   {bandwidthUpBits:>}   {bandwidthDownBits:>}",
+        "format-disconnected": "Disconnected ⚠",
+        "interval" : 1
+    },
+    "pulseaudio": {
+        "scroll-step": 1,
+        "format": "<span font='10' rise='-1000'>{icon}</span> {volume}%",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-muted": "",
+        "format-icons": {
+            "headphones": "",
+            "handsfree": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "custom/playerctl": {
+        "interval": 1,
+        "format": "<span font='10' rise='-1000'>{icon}</span> {}",
+        "format-icons": {
+            "spotify": "",
+            "default": ""
+        },
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous",
+        "on-click": "playerctl play-pause",
+        "escape": true,
+        "exec": "~/.config/polybar/scripts/pctl 2> /dev/null" // Script in resources folder
+    }
+}

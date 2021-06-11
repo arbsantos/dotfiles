@@ -1,0 +1,44 @@
+window {
+  margin: 5px;
+  background-color: #292929;
+}
+
+#input {
+  margin: 5px;
+  background-color: #292929;
+  color: #ffffff;
+}
+
+#inner-box {
+  margin: 5px;
+  background-color: #292929;
+}
+
+#outer-box {
+  margin: 5px;
+  background-color: #292929;
+}
+
+#scroll {
+margin: 5px;
+background-color: #292929;
+}
+
+#text {
+  margin: 5px;
+  background-color: #292929;
+  font-family: 'Cascadia Code';
+}
+
+#entry {
+  background-color: #292929;
+  color: #ffffff;
+}
+
+#entry:selected {
+  background-color: #292929;
+  color: #ff5757;
+}
+#text:selected {
+  color: #ff5757;
+}

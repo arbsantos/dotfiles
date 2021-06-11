@@ -1,0 +1,29 @@
+#!/bin/bash
+#read IN <<< $(dstat -d --noupdate --noheaders 1 2 | tail -n 2 | head -n 1 | awk '{print 
+"-"$0"-"$1"-"$2"-"$3"-"$4"-"$5"-"$6"-"}')
+#echo "$IN"
+#NO_READ=1
+#NO_WRITE=1
+#echo "${#IN}"
+#dstat -d --noupdate --noheaders 1 2 | tail -n 2 | head -n 
+1
+#IFS='-' read -ra ADDR <<< "$IN"
+#for i in "${ADDR[@]}"; do
+#    echo qql coisa "$i"
+#done
+
+#if (( $NO_READ==0 ))
+#then
+#echo ZERO
+#fi
+
+#if (( $NO_WRITE==0 ))
+#then
+#echo ZERO
+#fi
+
+#dstat -d --noupdate --noheaders 1 2 | tail -n 3 | head -n 3 | awk '{print "-"$0"-"$1"-"$2"-"$3"-"$4"-"$5"-"$6"-"}'
+echo $(dstat -d --noupdate --noheaders 1 2 | tail -n 2 | 
+head -n 
+1 | sed 's/\s\+/ /g' | sed 's/^\ //g' | awk '{print "Read: 
+"$1" Write: "$NF}')

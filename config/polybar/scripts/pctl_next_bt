@@ -1,0 +1,14 @@
+#!/bin/bash
+
+
+PLAYER_NAME="deezer"
+player_status=$(playerctl --player="$PLAYER_NAME" status 2> /dev/null)
+
+# Foreground color formatting tags are optional
+if [[ $player_status = "Playing" ]]; then
+    echo ""      # Orange when playing
+elif [[ $player_status = "Paused" ]]; then
+    echo ""      # Greyed out info when paused
+else
+    echo "" # Greyed out icon when stopped
+fi

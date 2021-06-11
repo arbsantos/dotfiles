@@ -1,0 +1,43 @@
+#!/bin/bash
+
+#set KB language
+setxkbmap pt
+
+# set screens
+~/.screenlayout/my-layout.sh &>/dev/null
+
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &>/dev/null &
+disown
+
+#set vivaldi default browser
+xdg-mime default vivaldi-stable.desktop 'x-scheme-handler/https'
+xdg-mime default vivaldi-stable.desktop 'x-scheme-handler/http'
+
+#load colors
+xrdb ~/.Xresources
+
+#restore wpp
+nitrogen --restore; sleep 1; 
+
+compton &
+disown
+
+#network tray
+nm-applet &>/dev/null &
+disown
+
+#mailspring
+mailspring &>/dev/null &
+disown
+
+#rambox
+rambox &>/dev/null &
+disown
+
+#discord
+discord &>/dev/null &
+disown
+
+#polybar
+#/home/andre/.config/polybar/launch &
+#disown

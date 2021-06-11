@@ -1,0 +1,6 @@
+#!/bin/bash
+mem=$(free -h | awk '/^Mem:/ {print $3 "/" $2}')
+swap=$(free -h | awk '/^Swap:/ {print $3 "/" $2}')
+proc=$(ps axch -o cmd:15,%mem --sort=-%mem | head)
+echo "RAM: "$mem" SWAP: "$swap""
+echo "<tool>Mem: "$proc"</tool>"
